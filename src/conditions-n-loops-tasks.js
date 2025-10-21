@@ -67,8 +67,15 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    (queen.x - king.x) ** 2 === (queen.y - king.y) ** 2
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -171,8 +178,40 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const words = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+  };
+
+  let result = '';
+  let i = 0;
+
+  while (numberStr[i] !== undefined) {
+    const num = numberStr[i];
+
+    if (i > 0) {
+      result += ' ';
+    }
+
+    if (num === '-') {
+      result += 'minus';
+    } else if (num === '.' || num === ',') {
+      result += 'point';
+    } else if (words[num] !== undefined) {
+      result += words[num];
+    }
+    i += 1;
+  }
+  return result;
 }
 
 /**
@@ -187,8 +226,20 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  if (str.length === 0 || str.length === 1) {
+    return true;
+  }
+  let left = 0;
+  let right = str.length - 1;
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      return false;
+    }
+    left += 1;
+    right -= 1;
+  }
+  return true;
 }
 
 /**
